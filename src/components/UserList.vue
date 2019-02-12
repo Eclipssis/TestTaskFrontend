@@ -20,77 +20,27 @@
         </v-card>
       </v-expansion-panel-content>
     </v-expansion-panel>
+    {{ users }}
   </v-card>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data: () => ({
-    users: [],
     showUserSpiner: false
   }),
 
+  computed: {
+    ...mapGetters({
+      users: "GET_USERS_LIST"
+    })
+  },
+
   mounted() {
     this.showUserSpiner = true;
-
-    // Имитация backend API
-    const fetchedUsers = new Promise(resolve => {
-      setTimeout(() => {
-        resolve([
-          {
-            id: 1,
-            name: "James Bond",
-            tasks: [
-              {
-                id: 1,
-                name: "Build the space ship",
-                due_date: "22.02.2019"
-              },
-              {
-                id: 2,
-                name: "Destroy darknet",
-                due_date: "15.03.2019"
-              },
-              {
-                id: 3,
-                name: "Drink beer",
-                due_date: "12.04.2019"
-              }
-            ]
-          },
-          {
-            id: 2,
-            name: "Donald Trump",
-            tasks: [
-              {
-                id: 4,
-                name: "Make US better",
-                due_date: "22.03.2019"
-              },
-              {
-                id: 5,
-                name: "Improve economics",
-                due_date: "25.04.2019"
-              },
-              {
-                id: 6,
-                name: "Get rest",
-                due_date: "12.05.2019"
-              }
-            ]
-          }
-        ]);
-      }, 1500);
-    });
-
-    fetchedUsers.then(users => {
-      users.forEach(user => {
-        this.users.push({
-          name: user.name,
-          children: user.tasks
-        });
-      });
-
+    this.$store.dispatch("FETCH_USERS").then(() => {
       this.showUserSpiner = false;
     });
   },

@@ -7,7 +7,9 @@
             <UserList />
           </v-flex>
 
-          <v-flex xs4></v-flex>
+          <v-flex xs8>
+            <TaskDetail />
+          </v-flex>
         </v-layout>
       </v-container>
     </v-content>
@@ -15,12 +17,14 @@
 </template>
 
 <script>
+import TaskDetail from "./components/TaskDetail";
 import UserList from "./components/UserList";
 
 export default {
   name: "App",
   components: {
-    UserList
+    UserList,
+    TaskDetail
   },
   data() {
     return {
