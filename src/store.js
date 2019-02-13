@@ -26,7 +26,11 @@ export default new Vuex.Store({
           return task.id === payload.id;
         });
 
-        state.usersList[index].children[taskIndex] = payload;
+        const task = Object.assign({}, payload);
+
+        if (taskIndex != -1) {
+          state.usersList[index].children.splice(taskIndex, 1, task);
+        }
       });
     },
     SET_USERS_LIST(state, payload) {
@@ -39,7 +43,7 @@ export default new Vuex.Store({
         });
       });
 
-      Vue.set(state, "usersList", users);
+      state.usersList = users;
     }
   },
   actions: {
@@ -94,7 +98,7 @@ export default new Vuex.Store({
 
           context.commit("SET_USERS_LIST", data);
           resolve(data);
-        }, 1500);
+        }, 2000);
       });
     }
   }

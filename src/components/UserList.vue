@@ -20,7 +20,6 @@
         </v-card>
       </v-expansion-panel-content>
     </v-expansion-panel>
-    {{ users }}
   </v-card>
 </template>
 

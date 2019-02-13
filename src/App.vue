@@ -25,11 +25,6 @@ export default {
   components: {
     UserList,
     TaskDetail
-  },
-  data() {
-    return {
-      //
-    };
   }
 };
 </script>
